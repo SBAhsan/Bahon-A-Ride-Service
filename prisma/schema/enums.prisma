@@ -1,0 +1,31 @@
+enum UserRole {
+  RIDER
+  DRIVER
+  ADMIN
+}
+
+enum VehicleType {
+  CAR
+  BIKE
+  AUTO
+}
+
+enum VerificationStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+}
+
+enum VehicleStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+enum RideStatus {
+  REQUESTED
+  ACCEPTED
+  ONGOING
+  COMPLETED
+  CANCELLED
+}

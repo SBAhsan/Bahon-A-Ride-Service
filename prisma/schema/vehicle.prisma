@@ -1,0 +1,25 @@
+model Vehicle {
+    id                   String             @id @default(uuid())
+    licensePlate         String             @unique
+    make                 String
+    model                String
+    year                 Int
+    color                String
+    vehicleType          VehicleType
+    seatingCapacity      Int
+    driverId             String
+    driver               Driver             @relation(fields: [driverId], references: [id], onDelete: Cascade)
+    registrationDocument String
+    insuranceDocument    String
+    insuranceExpiry      DateTime           @db.Date
+    verificationStatus   VerificationStatus @default(PENDING)
+    status               VehicleStatus      @default(INACTIVE)
+    isAvailable          Boolean            @default(false)
+    rides                RideBooking[]
+    createdAt            DateTime           @default(now())
+    updatedAt            DateTime           @updatedAt
+
+    @@index([driverId])
+    @@index([status])
+    @@map("vehicles")
+}
