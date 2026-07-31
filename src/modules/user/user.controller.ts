@@ -31,7 +31,7 @@ const getAllUsers = catchAsync(async(req: Request, res: Response, next: NextFunc
 
 
 const getSingleUser = catchAsync(async(req: Request, res: Response, next: NextFunction) => {
-    const userId = req.params.id;
+    const userId = req.params.userId;
 
     console.log("The user id is: ",userId);
 
@@ -44,10 +44,41 @@ const getSingleUser = catchAsync(async(req: Request, res: Response, next: NextFu
         message: "User retrieved successfully",
         data: result
     })
+});
+
+
+const updateUser = catchAsync(async(req: Request, res: Response, next: NextFunction) => {
+    const userId = req.params.userId;
+    const payload = req.body;
+
+    const result = await userService.updateUserInDB(userId as string, payload);
+
+    sendResponse(res, {
+        success: true,
+        statusCode: httpStatus.OK,
+        message: "User updated successfully",
+        data: result
+    })
+});
+
+
+const deleteUser = catchAsync(async(req: Request, res: Response, next: NextFunction) => {
+    const userId = req.params.userId;
+
+    const result = await userService.deleteUserFromDB(userId as string);
+
+    sendResponse(res, {
+        success: true,
+        statusCode: httpStatus.OK,
+        message: "User deleted successfully",
+        data: {}
+    })
 })
 
 export const userController = {
     registerUser,
     getAllUsers,
-    getSingleUser
+    getSingleUser,
+    updateUser,
+    deleteUser
 }

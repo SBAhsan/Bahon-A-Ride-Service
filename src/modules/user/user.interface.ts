@@ -1,9 +1,17 @@
 import { UserRole } from "../../../prisma/generated/prisma/enums";
 
-export interface ICreateUser{
+export interface ICreateUser {
   name: string;
   email: string;
   phone: string;
   password: string;
-  role?: UserRole
+  role?: UserRole;
+}
+
+export interface IUpdateUser {
+  name?: string;
+  email?: string;
+  phone?: string;
+  password?: string;
+  role?: UserRole;
 }
