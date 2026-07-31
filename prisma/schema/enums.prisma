@@ -29,3 +29,16 @@ enum RideStatus {
   COMPLETED
   CANCELLED
 }
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+enum PaymentMethod {
+  CASH
+  CARD
+  WALLET
+}

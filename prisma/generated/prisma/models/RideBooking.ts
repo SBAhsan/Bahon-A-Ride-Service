@@ -291,6 +291,7 @@ export type RideBookingWhereInput = {
   rider?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   driver?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   vehicle?: Prisma.XOR<Prisma.VehicleScalarRelationFilter, Prisma.VehicleWhereInput>
+  payments?: Prisma.PaymentListRelationFilter
 }
 
 export type RideBookingOrderByWithRelationInput = {
@@ -309,6 +310,7 @@ export type RideBookingOrderByWithRelationInput = {
   rider?: Prisma.UserOrderByWithRelationInput
   driver?: Prisma.UserOrderByWithRelationInput
   vehicle?: Prisma.VehicleOrderByWithRelationInput
+  payments?: Prisma.PaymentOrderByRelationAggregateInput
 }
 
 export type RideBookingWhereUniqueInput = Prisma.AtLeast<{
@@ -330,6 +332,7 @@ export type RideBookingWhereUniqueInput = Prisma.AtLeast<{
   rider?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   driver?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   vehicle?: Prisma.XOR<Prisma.VehicleScalarRelationFilter, Prisma.VehicleWhereInput>
+  payments?: Prisma.PaymentListRelationFilter
 }, "id">
 
 export type RideBookingOrderByWithAggregationInput = {
@@ -383,6 +386,7 @@ export type RideBookingCreateInput = {
   rider: Prisma.UserCreateNestedOneWithoutRiderRidesInput
   driver: Prisma.UserCreateNestedOneWithoutDriverRidesInput
   vehicle: Prisma.VehicleCreateNestedOneWithoutRidesInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutRideInput
 }
 
 export type RideBookingUncheckedCreateInput = {
@@ -398,6 +402,7 @@ export type RideBookingUncheckedCreateInput = {
   fare: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRideInput
 }
 
 export type RideBookingUpdateInput = {
@@ -413,6 +418,7 @@ export type RideBookingUpdateInput = {
   rider?: Prisma.UserUpdateOneRequiredWithoutRiderRidesNestedInput
   driver?: Prisma.UserUpdateOneRequiredWithoutDriverRidesNestedInput
   vehicle?: Prisma.VehicleUpdateOneRequiredWithoutRidesNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutRideNestedInput
 }
 
 export type RideBookingUncheckedUpdateInput = {
@@ -428,6 +434,7 @@ export type RideBookingUncheckedUpdateInput = {
   fare?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutRideNestedInput
 }
 
 export type RideBookingCreateManyInput = {
@@ -470,6 +477,11 @@ export type RideBookingUncheckedUpdateManyInput = {
   fare?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type RideBookingScalarRelationFilter = {
+  is?: Prisma.RideBookingWhereInput
+  isNot?: Prisma.RideBookingWhereInput
 }
 
 export type RideBookingCountOrderByAggregateInput = {
@@ -543,16 +555,22 @@ export type RideBookingOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type EnumRideStatusFieldUpdateOperationsInput = {
-  set?: $Enums.RideStatus
+export type RideBookingCreateNestedOneWithoutPaymentsInput = {
+  create?: Prisma.XOR<Prisma.RideBookingCreateWithoutPaymentsInput, Prisma.RideBookingUncheckedCreateWithoutPaymentsInput>
+  connectOrCreate?: Prisma.RideBookingCreateOrConnectWithoutPaymentsInput
+  connect?: Prisma.RideBookingWhereUniqueInput
 }
 
-export type DecimalFieldUpdateOperationsInput = {
-  set?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+export type RideBookingUpdateOneRequiredWithoutPaymentsNestedInput = {
+  create?: Prisma.XOR<Prisma.RideBookingCreateWithoutPaymentsInput, Prisma.RideBookingUncheckedCreateWithoutPaymentsInput>
+  connectOrCreate?: Prisma.RideBookingCreateOrConnectWithoutPaymentsInput
+  upsert?: Prisma.RideBookingUpsertWithoutPaymentsInput
+  connect?: Prisma.RideBookingWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RideBookingUpdateToOneWithWhereWithoutPaymentsInput, Prisma.RideBookingUpdateWithoutPaymentsInput>, Prisma.RideBookingUncheckedUpdateWithoutPaymentsInput>
+}
+
+export type EnumRideStatusFieldUpdateOperationsInput = {
+  set?: $Enums.RideStatus
 }
 
 export type RideBookingCreateNestedManyWithoutDriverInput = {
@@ -681,6 +699,82 @@ export type RideBookingUncheckedUpdateManyWithoutVehicleNestedInput = {
   deleteMany?: Prisma.RideBookingScalarWhereInput | Prisma.RideBookingScalarWhereInput[]
 }
 
+export type RideBookingCreateWithoutPaymentsInput = {
+  id?: string
+  pickupLat: number
+  pickupLng: number
+  dropoffLat: number
+  dropoffLng: number
+  status?: $Enums.RideStatus
+  fare: runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  rider: Prisma.UserCreateNestedOneWithoutRiderRidesInput
+  driver: Prisma.UserCreateNestedOneWithoutDriverRidesInput
+  vehicle: Prisma.VehicleCreateNestedOneWithoutRidesInput
+}
+
+export type RideBookingUncheckedCreateWithoutPaymentsInput = {
+  id?: string
+  riderId: string
+  driverId: string
+  vehicleId: string
+  pickupLat: number
+  pickupLng: number
+  dropoffLat: number
+  dropoffLng: number
+  status?: $Enums.RideStatus
+  fare: runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type RideBookingCreateOrConnectWithoutPaymentsInput = {
+  where: Prisma.RideBookingWhereUniqueInput
+  create: Prisma.XOR<Prisma.RideBookingCreateWithoutPaymentsInput, Prisma.RideBookingUncheckedCreateWithoutPaymentsInput>
+}
+
+export type RideBookingUpsertWithoutPaymentsInput = {
+  update: Prisma.XOR<Prisma.RideBookingUpdateWithoutPaymentsInput, Prisma.RideBookingUncheckedUpdateWithoutPaymentsInput>
+  create: Prisma.XOR<Prisma.RideBookingCreateWithoutPaymentsInput, Prisma.RideBookingUncheckedCreateWithoutPaymentsInput>
+  where?: Prisma.RideBookingWhereInput
+}
+
+export type RideBookingUpdateToOneWithWhereWithoutPaymentsInput = {
+  where?: Prisma.RideBookingWhereInput
+  data: Prisma.XOR<Prisma.RideBookingUpdateWithoutPaymentsInput, Prisma.RideBookingUncheckedUpdateWithoutPaymentsInput>
+}
+
+export type RideBookingUpdateWithoutPaymentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  pickupLat?: Prisma.FloatFieldUpdateOperationsInput | number
+  pickupLng?: Prisma.FloatFieldUpdateOperationsInput | number
+  dropoffLat?: Prisma.FloatFieldUpdateOperationsInput | number
+  dropoffLng?: Prisma.FloatFieldUpdateOperationsInput | number
+  status?: Prisma.EnumRideStatusFieldUpdateOperationsInput | $Enums.RideStatus
+  fare?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rider?: Prisma.UserUpdateOneRequiredWithoutRiderRidesNestedInput
+  driver?: Prisma.UserUpdateOneRequiredWithoutDriverRidesNestedInput
+  vehicle?: Prisma.VehicleUpdateOneRequiredWithoutRidesNestedInput
+}
+
+export type RideBookingUncheckedUpdateWithoutPaymentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  riderId?: Prisma.StringFieldUpdateOperationsInput | string
+  driverId?: Prisma.StringFieldUpdateOperationsInput | string
+  vehicleId?: Prisma.StringFieldUpdateOperationsInput | string
+  pickupLat?: Prisma.FloatFieldUpdateOperationsInput | number
+  pickupLng?: Prisma.FloatFieldUpdateOperationsInput | number
+  dropoffLat?: Prisma.FloatFieldUpdateOperationsInput | number
+  dropoffLng?: Prisma.FloatFieldUpdateOperationsInput | number
+  status?: Prisma.EnumRideStatusFieldUpdateOperationsInput | $Enums.RideStatus
+  fare?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type RideBookingCreateWithoutDriverInput = {
   id?: string
   pickupLat: number
@@ -693,6 +787,7 @@ export type RideBookingCreateWithoutDriverInput = {
   updatedAt?: Date | string
   rider: Prisma.UserCreateNestedOneWithoutRiderRidesInput
   vehicle: Prisma.VehicleCreateNestedOneWithoutRidesInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutRideInput
 }
 
 export type RideBookingUncheckedCreateWithoutDriverInput = {
@@ -707,6 +802,7 @@ export type RideBookingUncheckedCreateWithoutDriverInput = {
   fare: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRideInput
 }
 
 export type RideBookingCreateOrConnectWithoutDriverInput = {
@@ -731,6 +827,7 @@ export type RideBookingCreateWithoutRiderInput = {
   updatedAt?: Date | string
   driver: Prisma.UserCreateNestedOneWithoutDriverRidesInput
   vehicle: Prisma.VehicleCreateNestedOneWithoutRidesInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutRideInput
 }
 
 export type RideBookingUncheckedCreateWithoutRiderInput = {
@@ -745,6 +842,7 @@ export type RideBookingUncheckedCreateWithoutRiderInput = {
   fare: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRideInput
 }
 
 export type RideBookingCreateOrConnectWithoutRiderInput = {
@@ -819,6 +917,7 @@ export type RideBookingCreateWithoutVehicleInput = {
   updatedAt?: Date | string
   rider: Prisma.UserCreateNestedOneWithoutRiderRidesInput
   driver: Prisma.UserCreateNestedOneWithoutDriverRidesInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutRideInput
 }
 
 export type RideBookingUncheckedCreateWithoutVehicleInput = {
@@ -833,6 +932,7 @@ export type RideBookingUncheckedCreateWithoutVehicleInput = {
   fare: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
   updatedAt?: Date | string
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRideInput
 }
 
 export type RideBookingCreateOrConnectWithoutVehicleInput = {
@@ -901,6 +1001,7 @@ export type RideBookingUpdateWithoutDriverInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rider?: Prisma.UserUpdateOneRequiredWithoutRiderRidesNestedInput
   vehicle?: Prisma.VehicleUpdateOneRequiredWithoutRidesNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutRideNestedInput
 }
 
 export type RideBookingUncheckedUpdateWithoutDriverInput = {
@@ -915,6 +1016,7 @@ export type RideBookingUncheckedUpdateWithoutDriverInput = {
   fare?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutRideNestedInput
 }
 
 export type RideBookingUncheckedUpdateManyWithoutDriverInput = {
@@ -943,6 +1045,7 @@ export type RideBookingUpdateWithoutRiderInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   driver?: Prisma.UserUpdateOneRequiredWithoutDriverRidesNestedInput
   vehicle?: Prisma.VehicleUpdateOneRequiredWithoutRidesNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutRideNestedInput
 }
 
 export type RideBookingUncheckedUpdateWithoutRiderInput = {
@@ -957,6 +1060,7 @@ export type RideBookingUncheckedUpdateWithoutRiderInput = {
   fare?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutRideNestedInput
 }
 
 export type RideBookingUncheckedUpdateManyWithoutRiderInput = {
@@ -999,6 +1103,7 @@ export type RideBookingUpdateWithoutVehicleInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   rider?: Prisma.UserUpdateOneRequiredWithoutRiderRidesNestedInput
   driver?: Prisma.UserUpdateOneRequiredWithoutDriverRidesNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutRideNestedInput
 }
 
 export type RideBookingUncheckedUpdateWithoutVehicleInput = {
@@ -1013,6 +1118,7 @@ export type RideBookingUncheckedUpdateWithoutVehicleInput = {
   fare?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutRideNestedInput
 }
 
 export type RideBookingUncheckedUpdateManyWithoutVehicleInput = {
@@ -1029,6 +1135,35 @@ export type RideBookingUncheckedUpdateManyWithoutVehicleInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+
+/**
+ * Count Type RideBookingCountOutputType
+ */
+
+export type RideBookingCountOutputType = {
+  payments: number
+}
+
+export type RideBookingCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  payments?: boolean | RideBookingCountOutputTypeCountPaymentsArgs
+}
+
+/**
+ * RideBookingCountOutputType without action
+ */
+export type RideBookingCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RideBookingCountOutputType
+   */
+  select?: Prisma.RideBookingCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * RideBookingCountOutputType without action
+ */
+export type RideBookingCountOutputTypeCountPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PaymentWhereInput
+}
 
 
 export type RideBookingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1047,6 +1182,8 @@ export type RideBookingSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   rider?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   driver?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   vehicle?: boolean | Prisma.VehicleDefaultArgs<ExtArgs>
+  payments?: boolean | Prisma.RideBooking$paymentsArgs<ExtArgs>
+  _count?: boolean | Prisma.RideBookingCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["rideBooking"]>
 
 export type RideBookingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1105,6 +1242,8 @@ export type RideBookingInclude<ExtArgs extends runtime.Types.Extensions.Internal
   rider?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   driver?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   vehicle?: boolean | Prisma.VehicleDefaultArgs<ExtArgs>
+  payments?: boolean | Prisma.RideBooking$paymentsArgs<ExtArgs>
+  _count?: boolean | Prisma.RideBookingCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type RideBookingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   rider?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1123,6 +1262,7 @@ export type $RideBookingPayload<ExtArgs extends runtime.Types.Extensions.Interna
     rider: Prisma.$UserPayload<ExtArgs>
     driver: Prisma.$UserPayload<ExtArgs>
     vehicle: Prisma.$VehiclePayload<ExtArgs>
+    payments: Prisma.$PaymentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1534,6 +1674,7 @@ export interface Prisma__RideBookingClient<T, Null = never, ExtArgs extends runt
   rider<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   driver<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   vehicle<T extends Prisma.VehicleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VehicleDefaultArgs<ExtArgs>>): Prisma.Prisma__VehicleClient<runtime.Types.Result.GetResult<Prisma.$VehiclePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  payments<T extends Prisma.RideBooking$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RideBooking$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1973,6 +2114,30 @@ export type RideBookingDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Limit how many RideBookings to delete.
    */
   limit?: number
+}
+
+/**
+ * RideBooking.payments
+ */
+export type RideBooking$paymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Payment
+   */
+  select?: Prisma.PaymentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Payment
+   */
+  omit?: Prisma.PaymentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentInclude<ExtArgs> | null
+  where?: Prisma.PaymentWhereInput
+  orderBy?: Prisma.PaymentOrderByWithRelationInput | Prisma.PaymentOrderByWithRelationInput[]
+  cursor?: Prisma.PaymentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PaymentScalarFieldEnum | Prisma.PaymentScalarFieldEnum[]
 }
 
 /**

@@ -23,6 +23,11 @@ export * from './enums';
  */
 export type Driver = Prisma.DriverModel
 /**
+ * Model Payment
+ * 
+ */
+export type Payment = Prisma.PaymentModel
+/**
  * Model RideBooking
  * 
  */
