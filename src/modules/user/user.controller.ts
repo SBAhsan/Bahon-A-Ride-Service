@@ -15,8 +15,39 @@ const registerUser = catchAsync(async(req: Request, res: Response, next: NextFun
         message: "You registered successfully",
         data: user
     })
+});
+
+
+const getAllUsers = catchAsync(async(req: Request, res: Response, next: NextFunction) => {
+    const result = await userService.getAllUserFromDB();
+
+    sendResponse(res, {
+        success: true,
+        statusCode: httpStatus.OK,
+        message: "Retrieved all users successfully",
+        data: result
+    })
+});
+
+
+const getSingleUser = catchAsync(async(req: Request, res: Response, next: NextFunction) => {
+    const userId = req.params.id;
+
+    console.log("The user id is: ",userId);
+
+    const result = await userService.getSingleUserFromDB(userId as string);
+
+
+    sendResponse(res, {
+        success: true,
+        statusCode: httpStatus.OK,
+        message: "User retrieved successfully",
+        data: result
+    })
 })
 
 export const userController = {
-    registerUser
+    registerUser,
+    getAllUsers,
+    getSingleUser
 }

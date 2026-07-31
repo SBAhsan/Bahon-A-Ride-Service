@@ -22,7 +22,7 @@ app.get('/', (req: Request, res: Response) => {
 })
 
 
-app.use('/api/user', userRoute);
+app.use('/api/users', userRoute);
 app.use('/api/auth', authRoute);
 
 export default app;
